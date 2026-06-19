@@ -13,7 +13,6 @@ class TaskViewModel(
     private val quoteRepository: QuoteRepository
 ) : ViewModel() {
 
-    // 📌 TASKS (ROOM)
     val tasks = repository.getTasks()
         .stateIn(
             viewModelScope,
@@ -21,7 +20,6 @@ class TaskViewModel(
             emptyList()
         )
 
-    // 📌 FRASE API
     private val _quote = MutableStateFlow("Cargando...")
     val quote: StateFlow<String> = _quote
 
@@ -36,7 +34,6 @@ class TaskViewModel(
         }
     }
 
-    // 📌 CRUD
     fun insert(task: Task) {
         viewModelScope.launch {
             repository.insert(task)

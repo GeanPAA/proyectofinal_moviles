@@ -15,14 +15,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // 📌 ROOM
         val db = DatabaseProvider.provideDatabase(this)
         val taskRepository = TaskRepository(db.taskDao())
 
-        // 📌 API
         val quoteRepository = QuoteRepository(RetrofitInstance.api)
 
-        // 📌 VIEWMODEL (YA CON TODO)
         val viewModel = TaskViewModel(taskRepository, quoteRepository)
 
         setContent {

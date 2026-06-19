@@ -111,7 +111,6 @@ fun TaskItem(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
-            // 🔥 CHECKBOX (ESTADO COMPLETADO)
             Checkbox(
                 checked = task.completada,
                 onCheckedChange = {
@@ -121,7 +120,6 @@ fun TaskItem(
 
             Spacer(modifier = Modifier.width(8.dp))
 
-            // 🔥 INFO DE LA TAREA
             Column(
                 modifier = Modifier
                     .weight(1f)
@@ -137,7 +135,6 @@ fun TaskItem(
                 Text(text = task.fechaLimite)
             }
 
-            // 🔥 DELETE
             IconButton(onClick = onDelete) {
                 Icon(
                     imageVector = Icons.Default.Delete,
