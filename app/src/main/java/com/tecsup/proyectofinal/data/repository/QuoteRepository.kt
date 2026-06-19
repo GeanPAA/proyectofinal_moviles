@@ -8,11 +8,10 @@ class QuoteRepository(
 
     suspend fun getQuote(): String {
         return try {
-            val response = api.getQuote()
-            val quote = response.firstOrNull()
-            "${quote?.q ?: "Sin frase"} - ${quote?.a ?: ""}"
+            val quote = api.getQuote()
+            "${quote.quote}\n\n— ${quote.author}"
         } catch (e: Exception) {
-            "Error al cargar frase"
+            "No se pudo cargar la frase motivacional"
         }
     }
 }

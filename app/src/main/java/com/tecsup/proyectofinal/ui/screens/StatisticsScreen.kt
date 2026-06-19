@@ -17,39 +17,74 @@ fun StatisticsScreen(
     val tasks = viewModel.tasks.collectAsState().value
     val quote = viewModel.quote.collectAsState().value
 
-    val total = tasks.size
-    val completadas = tasks.count { it.completada }
-    val pendientes = total - completadas
-
-    // 🔥 CARGA API UNA VEZ
     LaunchedEffect(Unit) {
         viewModel.loadQuote()
     }
+
+    val total = tasks.size
+    val completadas = tasks.count { it.completada }
+    val pendientes = total - completadas
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
 
-        Text("📊 Estadísticas", style = MaterialTheme.typography.headlineMedium)
+        Text(
+            text = "📊 Estadísticas",
+            style = MaterialTheme.typography.headlineMedium
+        )
 
-        // 📊 CARD DE STATS
-        Card {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text("Total: $total")
-                Text("Completadas: $completadas")
-                Text("Pendientes: $pendientes")
+        Card(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Text(
+                    text = "Resumen de tareas",
+                    style = MaterialTheme.typography.titleMedium
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text("📌 Total: $total")
+                Text("✅ Completadas: $completadas")
+                Text("⏳ Pendientes: $pendientes")
             }
         }
 
-        // 💡 CARD DE API
-        Card {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text("💡 Frase motivacional")
-                Text(quote)
+        Card(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp)
+            ) {
+
+                Text(
+                    text = "💡 Frase motivacional",
+                    style = MaterialTheme.typography.titleMedium
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = quote
+                )
             }
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Button(
+            onClick = {
+                navController.popBackStack()
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Volver")
         }
     }
 }

@@ -49,6 +49,19 @@ fun TaskListScreen(
                 modifier = Modifier.padding(16.dp)
             )
 
+            Button(
+                onClick = {
+                    navController.navigate(Routes.STATISTICS)
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+            ) {
+                Text("📊 Ver Estadísticas")
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
             if (tasks.isEmpty()) {
                 Text(
                     text = "No hay tareas aún",

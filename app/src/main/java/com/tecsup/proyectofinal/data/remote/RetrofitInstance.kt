@@ -5,10 +5,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
 
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://zenquotes.io/api/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-    val api: QuoteApi = retrofit.create(QuoteApi::class.java)
+    val api: QuoteApi by lazy {
+        Retrofit.Builder()
+            .baseUrl("https://dummyjson.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(QuoteApi::class.java)
+    }
 }
